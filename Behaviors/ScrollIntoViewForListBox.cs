@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 
-namespace fuzzyLauncher
+namespace fuzzyLauncher.Behaviors
 {
     public class ScrollIntoViewForListBox : Behavior<ListBox>
     {
@@ -16,7 +12,7 @@ namespace fuzzyLauncher
         protected override void OnAttached()
         {
             base.OnAttached();
-            this.AssociatedObject.SelectionChanged += AssociatedObject_SelectionChanged;
+            AssociatedObject.SelectionChanged += AssociatedObject_SelectionChanged;
         }
 
         /// <summary>
@@ -50,7 +46,7 @@ namespace fuzzyLauncher
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            this.AssociatedObject.SelectionChanged -=
+            AssociatedObject.SelectionChanged -=
                 AssociatedObject_SelectionChanged;
 
         }

@@ -88,7 +88,7 @@
     <Compile Include="Base\Class1.cs" />
     <Compile Include="FastObservableCollection.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
-    <Compile Include="ScrollIntoViewForListBox.cs" />
+    <Compile Include="Behaviors\ScrollIntoViewForListBox.cs" />
     <Compile Include="SearchProviders\ActiveProcessProvider.cs" />
     <Compile Include="SearchProviders\SearchProvider.cs" />
     <Compile Include="Engine\SearchEngine.cs" />
