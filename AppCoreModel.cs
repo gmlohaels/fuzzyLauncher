@@ -1,16 +1,17 @@
 using System;
 using System.ComponentModel;
-using System.Linq.Expressions;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Threading;
 using fuzzyLauncher.Annotations;
-using fuzzyLauncher.Base;
 using fuzzyLauncher.Engine;
+using fuzzyLauncher.Mef;
 using fuzzyLauncher.SearchProviders;
+using fuzzyLauncher.SearchProviders.GoogleTranslate;
+using Shared;
+using Shared.Base;
 
 namespace fuzzyLauncher
 {
@@ -28,8 +29,6 @@ namespace fuzzyLauncher
             return true;
         }
 
-
-
         public SearchEngine SearchEngine = new SearchEngine();
         private readonly FastObservableCollection<SearchProviderResult> rawResultList;
 
@@ -39,25 +38,36 @@ namespace fuzzyLauncher
 
         public AppCoreModel()
         {
-
             rawResultList = new FastObservableCollection<SearchProviderResult>();
-            SearchEngine.RegisterSearchProvider(new ActiveProcessesProvider(SearchEngine));
-            ResultList = CollectionViewSource.GetDefaultView(rawResultList);
 
+
+            var safeCatalog = new SafeDirectoryCatalog("Providers");
+            var container = new CompositionContainer(safeCatalog.Catalog);
+
+            container.ComposeParts(SearchEngine);
+
+
+            SearchEngine.OnProviderCompleteSearch += SearchEngine_OnProviderCompleteSearch;
+
+
+
+            ResultList = CollectionViewSource.GetDefaultView(rawResultList);
             ResultList.GroupDescriptions.Add(new PropertyGroupDescription("ProviderName"));
             ResultList.GroupDescriptions.Add(new PropertyGroupDescription("GroupName"));
-            ResultList.SortDescriptions.Add(new SortDescription("ProviderAndGroup", ListSortDirection.Ascending));
-            SearchEngine.OnProviderCompleteSearch += SearchEngine_OnProviderCompleteSearch;
+            ResultList.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
+
+
+
+
+
+            SearchEngine.ComposingFinished();
 
         }
 
-        void SearchEngine_OnProviderCompleteSearch(SearchEngine sender, SearchProvider p, SearchEngine.SearchRequest searchRequest, System.Collections.Generic.List<Base.SearchProviderResult> searchResult, System.Diagnostics.Stopwatch searchPerformance)
+        void SearchEngine_OnProviderCompleteSearch(SearchEngine sender, SearchProvider p, SearchProvider.SearchResult result)
         {
-
-
-
-            rawResultList.AddItems(searchResult);
-
+            
+            rawResultList.AddItems(result.SearchResults);
             //Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal,
             //    (Action)delegate()
             //{
@@ -91,7 +101,10 @@ namespace fuzzyLauncher
         SearchProviderResult selectedItem;
         public SearchProviderResult SelectedItem
         {
-            get { return selectedItem; }
+            get
+            {
+                return selectedItem;
+            }
             set { SetProperty(ref selectedItem, value); }
         }
 

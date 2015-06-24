@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
+using System.Windows.Media;
 
 namespace fuzzyLauncher.Behaviors
 {
@@ -13,7 +15,11 @@ namespace fuzzyLauncher.Behaviors
         {
             base.OnAttached();
             AssociatedObject.SelectionChanged += AssociatedObject_SelectionChanged;
+
+
         }
+
+
 
         /// <summary>
         /// On Selection Changed
@@ -23,21 +29,26 @@ namespace fuzzyLauncher.Behaviors
         void AssociatedObject_SelectionChanged(object sender,
                                                SelectionChangedEventArgs e)
         {
+            
+
             if (sender is ListBox)
             {
                 ListBox listBox = (sender as ListBox);
-                if (listBox.SelectedItem != null)
-                {
-                    listBox.Dispatcher.BeginInvoke(
-                        (Action)(() =>
+
+                listBox.Dispatcher.BeginInvoke(
+                    (Action)(() =>
+                    {
+                        listBox.UpdateLayout();
+                        if (listBox.SelectedItem != null)
+                            listBox.ScrollIntoView(listBox.SelectedItem);
+                        else
                         {
-                            listBox.UpdateLayout();
-                            if (listBox.SelectedItem !=
-                                null)
-                                listBox.ScrollIntoView(
-                                    listBox.SelectedItem);
-                        }));
-                }
+                            (((VisualTreeHelper.GetChild(listBox, 0) as Border).Child) as ScrollViewer).ScrollToVerticalOffset(0);
+                          
+                        }
+                    }));
+
+
             }
         }
         /// <summary>

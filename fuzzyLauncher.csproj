@@ -64,8 +64,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,14 +87,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppCoreModel.cs" />
-    <Compile Include="Base\Class1.cs" />
+    <Compile Include="Behaviors\BrowserBehavior.cs" />
     <Compile Include="FastObservableCollection.cs" />
-    <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Behaviors\ScrollIntoViewForListBox.cs" />
+    <Compile Include="Mef\SafeDirectoryCatalog.cs" />
     <Compile Include="SearchProviders\ActiveProcessProvider.cs" />
-    <Compile Include="SearchProviders\SearchProvider.cs" />
+    <Compile Include="SearchProviders\BasicCommandsProvider.cs" />
+    <Compile Include="SearchProviders\GoogleTranslate\GoogleTranslateProvider.cs" />
     <Compile Include="Engine\SearchEngine.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="SearchProviders\GoogleTranslate\Translator.cs" />
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -150,6 +154,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{1b56d841-762a-4373-a9e9-ffdf3b10e47e}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Application.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\cmd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\application_default_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

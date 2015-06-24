@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Windows.Threading;
 
 namespace fuzzyLauncher
@@ -105,6 +106,10 @@ namespace fuzzyLauncher
             // Recommended is to avoid reentry 
             // in collection changed event while collection
             // is getting changed on other thread.
+
+
+
+
             using (BlockReentrancy())
             {
                 if (!this.suspendCollectionChangeNotification)
@@ -142,6 +147,8 @@ namespace fuzzyLauncher
                     }
                 }
             }
+
+
         }
     }
 }
