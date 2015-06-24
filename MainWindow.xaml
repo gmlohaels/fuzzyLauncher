@@ -11,7 +11,7 @@
         ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="Fuzzy Launcher" Height="335.506" Width="620.833"  ShowInTaskbar="False" WindowStyle="None" WindowStartupLocation="CenterScreen"
-        Topmost="True" Activated="Window_Activated" Deactivated="Window_Deactivated" KeyDown="Window_KeyDown"
+        Topmost="True" Activated="Window_Activated"  KeyDown="Window_KeyDown" 
         >
 
 
@@ -69,7 +69,7 @@
 
 
 
-                <ListBox  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Column="0" Name="ResultList" AlternationCount="2" BorderThickness="0.1" ItemsSource="{Binding ResultList}" Margin="0,0,5,0"  SelectedItem="{Binding SelectedItem, NotifyOnTargetUpdated=True}" MouseUp="ResultList_MouseUp" 
+                <ListBox  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Column="0" Name="ResultList" AlternationCount="2" BorderThickness="0.1" ItemsSource="{Binding ResultList}" Margin="0,0,5,0"  SelectedItem="{Binding SelectedItem, NotifyOnTargetUpdated=True}" MouseUp="ResultList_MouseUp" MouseDoubleClick="ResultList_MouseDoubleClick" 
                      
                          
                          >

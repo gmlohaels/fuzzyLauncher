@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Shared.Base;
 
 namespace fuzzyLauncher
@@ -16,9 +17,21 @@ namespace fuzzyLauncher
         public MainWindow()
         {
             InitializeComponent();
-
             core = (AppCoreModel)DataContext;
+            CompositionTarget.Rendering += CheckForNonActive;
+            var hotKey = new HotKey(Key.Space, KeyModifier.Alt, OnHotKeyHandler);
+        }
 
+        private void CheckForNonActive(object sender, EventArgs e)
+        {
+            if (!IsActive && IsVisible)
+                Hide();
+
+        }
+
+        private void OnHotKeyHandler(HotKey obj)
+        {
+            Show();
         }
 
 
@@ -47,7 +60,7 @@ namespace fuzzyLauncher
             if (e.Key == Key.Escape)
             {
                 if (String.IsNullOrEmpty(core.QueryString))
-                    Environment.Exit(0);
+                    Hide();
                 core.QueryString = "";
 
             }
@@ -84,13 +97,13 @@ namespace fuzzyLauncher
 
         private void Window_Activated(object sender, EventArgs e)
         {
+            Activate();
+            Focus();
+            core.QueryString = "";
             SearchBox.Focus();
         }
 
-        private void Window_Deactivated(object sender, EventArgs e)
-        {
-            // Hide();
-        }
+
 
 
         private void SearchBoxOnKeyUp(object sender, KeyEventArgs e)
@@ -101,8 +114,11 @@ namespace fuzzyLauncher
                 //if (core.SelectedItem == null)
                 //    core.SelectedItem = ResultList.Items[0] as SearchProviderResult;
 
-                core.SelectedItem.GotKeyboardEvent(sender, e);
-                e.Handled = true;
+                if (core.SelectedItem != null)
+                {
+                    core.SelectedItem.GotKeyboardEvent(sender, e);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -111,7 +127,6 @@ namespace fuzzyLauncher
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
 
-
             if (e.Key == Key.Tab)
             {
                 SearchBox.Focus();
@@ -119,6 +134,14 @@ namespace fuzzyLauncher
             }
 
         }
+
+        private void ResultList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("DBLCLICK");
+        }
+
+
+
 
 
 

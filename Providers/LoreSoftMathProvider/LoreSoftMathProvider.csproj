@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{66FE3B6B-1410-45F6-9B3D-00360EA3C811}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LoreSoftMathProvider</RootNamespace>
+    <AssemblyName>LoreSoftMathProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\Providers\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\Providers\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LoreSoft.MathExpressions\ConvertExpression.cs" />
+    <Compile Include="LoreSoft.MathExpressions\ExpressionBase.cs" />
+    <Compile Include="LoreSoft.MathExpressions\FunctionExpression.cs" />
+    <Compile Include="LoreSoft.MathExpressions\GlobalSuppressions.cs" />
+    <Compile Include="LoreSoft.MathExpressions\IExpression.cs" />
+    <Compile Include="LoreSoft.MathExpressions\MathEvaluate.cs" />
+    <Compile Include="LoreSoft.MathExpressions\MathEvaluator.cs" />
+    <Compile Include="LoreSoft.MathExpressions\MathOperators.cs" />
+    <Compile Include="LoreSoft.MathExpressions\Metadata\AbbreviationAttribute.cs" />
+    <Compile Include="LoreSoft.MathExpressions\Metadata\AttributeReader.cs" />
+    <Compile Include="LoreSoft.MathExpressions\NumberExpression.cs" />
+    <Compile Include="LoreSoft.MathExpressions\OperatorExpression.cs" />
+    <Compile Include="LoreSoft.MathExpressions\ParseException.cs" />
+    <Compile Include="LoreSoft.MathExpressions\Properties\Resources.Designer.cs" />
+    <Compile Include="LoreSoft.MathExpressions\UnitConversion\LengthConverter.cs" />
+    <Compile Include="LoreSoft.MathExpressions\UnitConversion\MassConverter.cs" />
+    <Compile Include="LoreSoft.MathExpressions\UnitConversion\SpeedConverter.cs" />
+    <Compile Include="LoreSoft.MathExpressions\UnitConversion\TemperatureConverter.cs" />
+    <Compile Include="LoreSoft.MathExpressions\UnitConversion\TimeConverter.cs" />
+    <Compile Include="LoreSoft.MathExpressions\UnitConversion\UnitType.cs" />
+    <Compile Include="LoreSoft.MathExpressions\UnitConversion\VolumeConverter.cs" />
+    <Compile Include="LoreSoft.MathExpressions\VariableDictionary.cs" />
+    <Compile Include="LoreSoftMathProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.csproj">
+      <Project>{1B56D841-762A-4373-A9E9-FFDF3B10E47E}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LoreSoft.MathExpressions\LoreSoft.MathExpressions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LoreSoft.MathExpressions\MathExpressions.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LoreSoft.MathExpressions\Properties\Resources.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

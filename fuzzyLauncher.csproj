@@ -93,6 +93,7 @@
     <Compile Include="Behaviors\BrowserBehavior.cs" />
     <Compile Include="FastObservableCollection.cs" />
     <Compile Include="Behaviors\ScrollIntoViewForListBox.cs" />
+    <Compile Include="HotKey.cs" />
     <Compile Include="Mef\SafeDirectoryCatalog.cs" />
     <Compile Include="SearchProviders\ActiveProcessProvider.cs" />
     <Compile Include="SearchProviders\BasicCommandsProvider.cs" />

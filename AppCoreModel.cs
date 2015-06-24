@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using fuzzyLauncher.Annotations;
@@ -50,7 +51,7 @@ namespace fuzzyLauncher
 
             ResultList = CollectionViewSource.GetDefaultView(rawResultList);
             ResultList.GroupDescriptions.Add(new PropertyGroupDescription("ProviderName"));
-          //  ResultList.GroupDescriptions.Add(new PropertyGroupDescription("GroupName"));
+            //  ResultList.GroupDescriptions.Add(new PropertyGroupDescription("GroupName"));
             ResultList.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
 
 
@@ -63,8 +64,11 @@ namespace fuzzyLauncher
 
         void SearchEngine_OnProviderCompleteSearch(SearchEngine sender, SearchProvider p, SearchProvider.SearchResult result)
         {
-            
+
             rawResultList.AddItems(result.SearchResults);
+
+
+
             //Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal,
             //    (Action)delegate()
             //{
