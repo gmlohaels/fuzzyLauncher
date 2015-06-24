@@ -2,14 +2,11 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using fuzzyLauncher.Annotations;
 using fuzzyLauncher.Engine;
 using fuzzyLauncher.Mef;
-using fuzzyLauncher.SearchProviders;
-using fuzzyLauncher.SearchProviders.GoogleTranslate;
 using Shared;
 using Shared.Base;
 
@@ -53,7 +50,7 @@ namespace fuzzyLauncher
 
             ResultList = CollectionViewSource.GetDefaultView(rawResultList);
             ResultList.GroupDescriptions.Add(new PropertyGroupDescription("ProviderName"));
-            ResultList.GroupDescriptions.Add(new PropertyGroupDescription("GroupName"));
+          //  ResultList.GroupDescriptions.Add(new PropertyGroupDescription("GroupName"));
             ResultList.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
 
 

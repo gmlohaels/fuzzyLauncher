@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Net;
+using System.ComponentModel.Composition.Primitives;
+using System.Linq;
 using System.Text;
-using System.Windows.Input;
-using System.Windows.Media;
-using fuzzyLauncher.Engine;
+using System.Threading.Tasks;
 using Shared;
 using Shared.Base;
+using System.ComponentModel.Composition;
+using System.Net;
+using GoogleTranslate.Properties;
 
-namespace fuzzyLauncher.SearchProviders.GoogleTranslate
+namespace GoogleTranslate
 {
-
 
 
 
@@ -19,6 +19,10 @@ namespace fuzzyLauncher.SearchProviders.GoogleTranslate
     class GoogleTranslateProvider : SearchProvider
     {
 
+        public GoogleTranslateProvider()
+        {
+            ImageWrapper.SetIcon(Resource.gti);
+        }
 
         public static string TranslateText(string input, string languagePair)
         {

@@ -90,7 +90,16 @@
                     </ListBox.Resources>
 
                     <ListBox.GroupStyle>
-                        <GroupStyle  />
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding Items[0].Provider.ProviderIcon}" Width="24" />
+                                        <TextBlock Text="{Binding Path=Name}" Margin="6"  />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
                     </ListBox.GroupStyle>
                     <ListBox.ItemTemplate>
                         

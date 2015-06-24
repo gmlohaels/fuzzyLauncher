@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 
-namespace fuzzyLauncher.SearchProviders.GoogleTranslate
+namespace GoogleTranslate
 {
     /// <summary>
     /// Translates text using Google's online language tools.

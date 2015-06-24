@@ -29,7 +29,7 @@ namespace fuzzyLauncher.Behaviors
         void AssociatedObject_SelectionChanged(object sender,
                                                SelectionChangedEventArgs e)
         {
-            
+
 
             if (sender is ListBox)
             {
@@ -40,11 +40,14 @@ namespace fuzzyLauncher.Behaviors
                     {
                         listBox.UpdateLayout();
                         if (listBox.SelectedItem != null)
+                        {
                             listBox.ScrollIntoView(listBox.SelectedItem);
-                        else
+                        }
+
+                        if (listBox.SelectedItems == null || listBox.SelectedIndex == 0)
                         {
                             (((VisualTreeHelper.GetChild(listBox, 0) as Border).Child) as ScrollViewer).ScrollToVerticalOffset(0);
-                          
+
                         }
                     }));
 

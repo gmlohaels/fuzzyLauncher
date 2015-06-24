@@ -54,6 +54,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>launcher.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -93,10 +96,8 @@
     <Compile Include="Mef\SafeDirectoryCatalog.cs" />
     <Compile Include="SearchProviders\ActiveProcessProvider.cs" />
     <Compile Include="SearchProviders\BasicCommandsProvider.cs" />
-    <Compile Include="SearchProviders\GoogleTranslate\GoogleTranslateProvider.cs" />
     <Compile Include="Engine\SearchEngine.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="SearchProviders\GoogleTranslate\Translator.cs" />
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -141,6 +142,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -169,6 +171,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Properties\application_default_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="launcher.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
