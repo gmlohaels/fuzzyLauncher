@@ -49,7 +49,7 @@ namespace fuzzyLauncher.Mef
                     });
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

@@ -24,9 +24,7 @@ namespace fuzzyLauncher.SearchProviders
     [Export(typeof(SearchProvider))]
     class ActiveProcessesProvider : SearchProvider
     {
-
-
-        int currentSessionId = Process.GetCurrentProcess().SessionId;
+        readonly int currentSessionId = Process.GetCurrentProcess().SessionId;
 
         protected override List<SearchProviderResult> DoSearch(string searchString)
         {
@@ -53,12 +51,13 @@ namespace fuzzyLauncher.SearchProviders
                     };
 
 
-
-
                     result.SetKeyboardAction((x) =>
                     {
-                        MessageBox.Show(x.Result.DisplayName);
-                        return false;
+                        var p = result.ProviderMetadata as Process;
+
+                        if (p != null)
+                            p.Kill();
+                        return true;
                     });
 
 
@@ -70,7 +69,7 @@ namespace fuzzyLauncher.SearchProviders
                         }
 
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                         result.SetIcon(Properties.Resources.Application);
@@ -81,30 +80,6 @@ namespace fuzzyLauncher.SearchProviders
 
 
             return list;
-
-
-        }
-
-        private void KillProcess(object searchEngine, KeyEventArgs keyEventArgs, SearchProviderResult result, string args)
-        {
-            return;
-
-            // if (keyEventArgs.KeyCode != Keys.Enter) return;
-
-            try
-            {
-
-                var process = result.ProviderMetadata as Process;
-
-                if (process != null)
-                    process.Kill();
-
-
-            }
-            catch (Exception e)
-            {
-                DoExecuteActionException(e);
-            }
 
         }
 

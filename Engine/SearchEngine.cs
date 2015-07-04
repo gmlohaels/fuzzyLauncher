@@ -91,7 +91,7 @@ namespace fuzzyLauncher.Engine
 
             if (sw.ElapsedMilliseconds > 50)
             {
-                int x = 1;
+
             }
 
         }

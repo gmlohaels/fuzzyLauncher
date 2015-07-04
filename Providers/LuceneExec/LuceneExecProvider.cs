@@ -138,7 +138,7 @@ namespace LuceneExec
             writer.Optimize();
             writer.Dispose();
 
-            int x = 1;
+
         }
 
 
