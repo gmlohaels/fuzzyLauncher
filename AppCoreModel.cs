@@ -1,13 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows.Data;
+using System.Windows.Input;
 using fuzzyLauncher.Annotations;
+using fuzzyLauncher.Converters;
 using fuzzyLauncher.Engine;
 using fuzzyLauncher.Mef;
+using fuzzyLauncher.Utilitary;
 using Shared;
 using Shared.Base;
 
@@ -27,6 +32,13 @@ namespace fuzzyLauncher
             return true;
         }
 
+
+
+        [ImportMany]
+        private readonly List<ISearchStringConverter> converters = new List<ISearchStringConverter>();
+
+
+
         public SearchEngine SearchEngine = new SearchEngine();
         private readonly FastObservableCollection<SearchProviderResult> rawResultList;
 
@@ -43,6 +55,7 @@ namespace fuzzyLauncher
             var container = new CompositionContainer(safeCatalog.Catalog);
 
             container.ComposeParts(SearchEngine);
+            container.ComposeParts(this);
 
 
             SearchEngine.OnProviderCompleteSearch += SearchEngine_OnProviderCompleteSearch;
@@ -62,13 +75,18 @@ namespace fuzzyLauncher
 
         }
 
+
+
+
         void SearchEngine_OnProviderCompleteSearch(SearchEngine sender, SearchProvider p, SearchProvider.SearchResult result)
         {
+
+
 
             rawResultList.AddItems(result.SearchResults);
 
 
-
+            //      if (SelectedItem == null)
             //Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal,
             //    (Action)delegate()
             //{
@@ -76,7 +94,23 @@ namespace fuzzyLauncher
             //       OnPropertyChanged("SelectedItem");
             //});
         }
+        readonly List<Key> modifiers = new List<Key> { Key.LeftAlt, Key.RightAlt, Key.LeftCtrl, Key.RightCtrl };
 
+        public bool IsProviderKey(KeyEventArgs e)
+        {
+
+            if (modifiers.Any(Keyboard.IsKeyDown))
+            {
+                return true;
+            }
+
+
+            if (e.Key == Key.Enter)
+                return true;
+
+
+            return false;
+        }
 
 
         private string queryString;
@@ -89,6 +123,7 @@ namespace fuzzyLauncher
             }
             set
             {
+                //  SelectedItem = null;
                 rawResultList.Clear();
                 queryString = value;
                 SearchEngine.SetSearchPattern(value);
@@ -118,6 +153,37 @@ namespace fuzzyLauncher
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool ProcessQueryKeyEvent(object sender, KeyEventArgs e)
+        {
+
+
+            var converter = GetCompatibleConverterFor(e);
+
+
+            if (converter != null)
+            {
+                string ss = QueryString;
+                e.Handled = converter.Convert(e, SelectedItem, ref ss);
+                QueryString = ss;
+                return false;
+
+            }
+            if (IsProviderKey(e))
+            {
+                if (SelectedItem != null)
+                {
+                    return SelectedItem.GotKeyboardEvent(sender, e);
+                }
+            }
+            return false;
+
+        }
+
+        private ISearchStringConverter GetCompatibleConverterFor(KeyEventArgs e)
+        {
+            return converters.FirstOrDefault(t => t.CanHandleShortkey(e));
         }
     }
 }

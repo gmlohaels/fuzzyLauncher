@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Windows.Threading;
 
-namespace fuzzyLauncher
+namespace fuzzyLauncher.Utilitary
 {
     public class FastObservableCollection<T> : ObservableCollection<T>
     {
@@ -37,7 +36,8 @@ namespace fuzzyLauncher
         /// It then notifies once after all items are added.
         /// </summary>
         /// <param name="items">The source collection.</param>
-        public void AddItems(IList<T> items)
+        /// <param name="notifyChanges">Call NotifyProperty Changes</param>
+        public void AddItems(IList<T> items, bool notifyChanges = true)
         {
             lock (locker)
             {
@@ -46,7 +46,9 @@ namespace fuzzyLauncher
                 {
                     InsertItem(Count, i);
                 }
-                this.NotifyChanges();
+
+                if (notifyChanges)
+                    this.NotifyChanges();
             }
         }
 

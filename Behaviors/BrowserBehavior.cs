@@ -36,8 +36,8 @@ namespace fuzzyLauncher.Behaviors
             if (webBrowser != null)
             {
                 var value = e.NewValue as string ?? "&nbsp;";
-
-                value = "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" /> " + value;
+                //<meta  /> 
+                value = "<meta charset=\"utf-8\" http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" /> " + value;
                 webBrowser.NavigateToString(value);
             }
         }

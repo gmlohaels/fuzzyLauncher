@@ -60,7 +60,12 @@ namespace fuzzyLauncher.SearchProviders
 
             if (searchString.StartsWith("ex") || searchString.StartsWith("qu"))
             {
-                var searchProviderResult = GenerateResult("exit").SetEnterKeyAction((a) => Application.Current.Shutdown(0));
+                var searchProviderResult = GenerateResult("exit").SetEnterKeyAction((a) =>
+                {
+                    Application.Current.Shutdown(0);
+                    return true;
+
+                });
 
                 list.Add(searchProviderResult);
             }

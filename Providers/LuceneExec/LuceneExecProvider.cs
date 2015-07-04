@@ -29,7 +29,7 @@ namespace LuceneExec
 {
 
 
-      [Export(typeof(SearchProvider))]
+    [Export(typeof(SearchProvider))]
     public class LuceneExecProvider : SearchProvider
     {
 
@@ -76,7 +76,7 @@ namespace LuceneExec
                           DisplayName = fileName,
                           Path = file.ToLower(),
                       };
-                      
+
                       iconCache.TryAdd(q.Path, IconHelper.ExtractAssociatedBitmap(file));
                       l.Add(q);
                   }
@@ -93,6 +93,10 @@ namespace LuceneExec
 
         protected override void Initialize()
         {
+
+
+
+
             LuceneRamInit(LoadQuickAppList("d:\\ProgramFiles\\", "*.exe"));
         }
 
@@ -107,7 +111,7 @@ namespace LuceneExec
                 doc.Add(new Field("description", toSearch.Description, Field.Store.YES, Field.Index.ANALYZED));
                 doc.Add(new Field("groupName", toSearch.GroupName, Field.Store.YES, Field.Index.ANALYZED));
 
-               // iconCache.Add(toSearch.Path, toSearch.DisplayImage);
+                // iconCache.Add(toSearch.Path, toSearch.DisplayImage);
 
                 doc.Add(new Field("launchCount", toSearch.LaunchCount.ToString(), Field.Store.YES, Field.Index.ANALYZED));
 
@@ -137,10 +141,14 @@ namespace LuceneExec
             int x = 1;
         }
 
+
+
+
+
         protected override List<SearchProviderResult> DoSearch(string searchString)
         {
 
-          
+
             string text = QueryParser.Escape(searchString);
 
             var query = new QueryParser(Version.LUCENE_30, "displayName description customQuickName groupName", analyzer).Parse(
@@ -170,18 +178,21 @@ namespace LuceneExec
 
 
                 var launchCount = Convert.ToInt32(eDoc.GetField("launchCount").StringValue);
-                var result = new SearchProviderResult(this)
+
+
+                var result = ConstructResult<LuceneProviderResult>(customQuickName, desc, displayName, path, launchCount);
+
+                result.SetEnterKeyAction((e) =>
                 {
-                    CustomQuickName = customQuickName,
-                    Description = desc,
-                    DisplayName = displayName,
-                    LaunchCount = launchCount,
-                    Path = path,
-                };
+                    if (String.IsNullOrEmpty(e.Result.Path))
+                        return false;
+                    Process.Start(e.Result.Path, String.Empty);
+                    return true;
+                });
 
                 if (i != null)
                 {
-                     result.SetIcon(i);
+                    result.SetIcon(i);
                 }
                 resultList.Add(result);
             }

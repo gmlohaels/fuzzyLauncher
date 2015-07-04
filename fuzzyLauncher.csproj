@@ -58,6 +58,10 @@
     <ApplicationIcon>launcher.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
@@ -91,15 +95,21 @@
     </ApplicationDefinition>
     <Compile Include="AppCoreModel.cs" />
     <Compile Include="Behaviors\BrowserBehavior.cs" />
-    <Compile Include="FastObservableCollection.cs" />
+    <Compile Include="Converters\ISearchStringConverter.cs" />
+    <Compile Include="Converters\ResultDescriptionToSearchBoxConverter.cs" />
+    <Compile Include="Utilitary\FastObservableCollection.cs" />
     <Compile Include="Behaviors\ScrollIntoViewForListBox.cs" />
-    <Compile Include="HotKey.cs" />
+    <Compile Include="Utilitary\HotKey.cs" />
     <Compile Include="Mef\SafeDirectoryCatalog.cs" />
     <Compile Include="SearchProviders\ActiveProcessProvider.cs" />
     <Compile Include="SearchProviders\BasicCommandsProvider.cs" />
     <Compile Include="Engine\SearchEngine.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="TestWindow.xaml.cs">
+    <Compile Include="Converters\EngToCyrylicTwoWaysConverter.cs" />
+    <Compile Include="Windows\MainSettings.xaml.cs">
+      <DependentUpon>MainSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -118,7 +128,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TestWindow.xaml">
+    <Page Include="Windows\MainSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

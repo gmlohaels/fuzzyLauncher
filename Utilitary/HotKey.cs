@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Windows.Interop;
 
-namespace fuzzyLauncher
+namespace fuzzyLauncher.Utilitary
 {
     public class HotKey : IDisposable
     {

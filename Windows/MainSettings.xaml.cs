@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace fuzzyLauncher
+namespace fuzzyLauncher.Windows
 {
     /// <summary>
-    /// Interaction logic for TestWindow.xaml
+    /// Interaction logic for MainSettings.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class MainSettings : Window
     {
-        public TestWindow()
+        public MainSettings()
         {
             InitializeComponent();
         }

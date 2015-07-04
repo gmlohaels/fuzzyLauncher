@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using fuzzyLauncher.Utilitary;
+using fuzzyLauncher.Windows;
 using Shared.Base;
+using Shared.Helpers;
 
 namespace fuzzyLauncher
 {
@@ -35,26 +39,14 @@ namespace fuzzyLauncher
         }
 
 
-        readonly List<Key> modifiers = new List<Key> { Key.LeftAlt, Key.RightAlt, Key.LeftCtrl, Key.RightCtrl };
 
-        public bool IsProviderKey(KeyEventArgs e)
-        {
-
-            if (modifiers.Any(Keyboard.IsKeyDown))
-            {
-                return true;
-            }
-
-
-            if (e.Key == Key.Enter)
-                return true;
-
-
-            return false;
-        }
 
         private void SearchBox_KeyDown(object sender, KeyEventArgs e)
         {
+            //            FancyBalloon balloon = new FancyBalloon();
+
+            //show balloon and close it after 4 seconds
+
 
 
             if (e.Key == Key.Escape)
@@ -62,6 +54,7 @@ namespace fuzzyLauncher
                 if (String.IsNullOrEmpty(core.QueryString))
                     Hide();
                 core.QueryString = "";
+                //Environment.Exit(0);
 
             }
 
@@ -83,8 +76,15 @@ namespace fuzzyLauncher
                 if (e.Key == Key.Up && ResultList.SelectedIndex > 0)
                     ResultList.SelectedIndex--;
             }
-            SearchBox.Focus();
 
+
+            if (core.ProcessQueryKeyEvent(sender, e))
+            {
+                Hide();
+            }
+
+
+            SearchBox.Focus();
         }
 
 
@@ -106,20 +106,11 @@ namespace fuzzyLauncher
 
 
 
+
+
         private void SearchBoxOnKeyUp(object sender, KeyEventArgs e)
         {
-            if (IsProviderKey(e))
-            {
 
-                //if (core.SelectedItem == null)
-                //    core.SelectedItem = ResultList.Items[0] as SearchProviderResult;
-
-                if (core.SelectedItem != null)
-                {
-                    core.SelectedItem.GotKeyboardEvent(sender, e);
-                    e.Handled = true;
-                }
-            }
         }
 
 
@@ -141,10 +132,11 @@ namespace fuzzyLauncher
         }
 
 
+        private void ActivateSettingsForm(object sender, RoutedEventArgs e)
+        {
+            var ms = new MainSettings();
 
-
-
-
-
+            ms.ShowDialog();
+        }
     }
 }
