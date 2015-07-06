@@ -51,7 +51,7 @@ namespace fuzzyLauncher.SearchProviders
                     };
 
 
-                    result.SetKeyboardAction((x) =>
+                    result.SetEnterKeyAction((x) =>
                     {
                         var p = result.ProviderMetadata as Process;
 

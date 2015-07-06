@@ -78,16 +78,31 @@ namespace fuzzyLauncher
             }
 
 
-            if (core.ProcessQueryKeyEvent(sender, e))
+            if (core.ProcessCompatibleConverter(sender, e))
             {
-                Hide();
-            }
+                SearchBox.CaretIndex = Int32.MaxValue;
 
+            }
+            else
+            {
+                if (core.ProcessQueryKeyEvent(sender, e))
+                {
+                    Hide();
+                }
+            }
 
             SearchBox.Focus();
         }
 
-
+        private void CenterWindowOnScreen()
+        {
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double windowWidth = this.Width;
+            double windowHeight = this.Height;
+            this.Left = (screenWidth / 2) - (windowWidth / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);
+        }
 
 
         private void ResultList_MouseUp(object sender, MouseButtonEventArgs e)
@@ -98,6 +113,7 @@ namespace fuzzyLauncher
         private void Window_Activated(object sender, EventArgs e)
         {
             Activate();
+            CenterWindowOnScreen();
             Focus();
             core.QueryString = "";
             SearchBox.Focus();

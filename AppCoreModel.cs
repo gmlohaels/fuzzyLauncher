@@ -155,21 +155,28 @@ namespace fuzzyLauncher
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public bool ProcessQueryKeyEvent(object sender, KeyEventArgs e)
+
+
+        public bool ProcessCompatibleConverter(object sender, KeyEventArgs e)
         {
 
-
             var converter = GetCompatibleConverterFor(e);
-
 
             if (converter != null)
             {
                 string ss = QueryString;
                 e.Handled = converter.Convert(e, SelectedItem, ref ss);
                 QueryString = ss;
-                return false;
-
+                return true;
+                
             }
+            return false;
+
+        }
+
+        public bool ProcessQueryKeyEvent(object sender, KeyEventArgs e)
+        {
+
             if (IsProviderKey(e))
             {
                 if (SelectedItem != null)
