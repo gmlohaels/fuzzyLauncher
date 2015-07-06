@@ -26,7 +26,7 @@ namespace fuzzyLauncher.SearchProviders
     {
         readonly int currentSessionId = Process.GetCurrentProcess().SessionId;
 
-        protected override List<SearchProviderResult> DoSearch(string searchString)
+        protected override List<SearchProviderResult> DoSearch(SearchQuery q)
         {
 
             var list = new List<SearchProviderResult>();
@@ -36,9 +36,10 @@ namespace fuzzyLauncher.SearchProviders
             {
 
                 var procLower = process.ProcessName.ToLower();
-                var searchLower = searchString.ToLower();
+                var query = q.QueryString;
+                var searchLower = query.ToLower();
 
-                if (procLower.Contains(searchLower) || searchLower.Contains(procLower) || searchString == "*")
+                if (procLower.Contains(searchLower) || searchLower.Contains(procLower) || query == "*")
                 {
 
                     var result = new SearchProviderResult(this)

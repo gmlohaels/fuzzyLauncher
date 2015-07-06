@@ -21,6 +21,8 @@ namespace YandexTranslate
         public YandexTranslateProvider()
         {
             ImageWrapper.SetIcon(Resource.y2);
+            ExactMatchSearchPrefix = "=>";
+            MinSymbolsToStartSearch = 2;
         }
 
         public static string TranslateText(string input, string direction)
@@ -43,40 +45,27 @@ namespace YandexTranslate
 
 
 
-
-        protected override List<SearchProviderResult> DoSearch(string searchString)
+        protected override List<SearchProviderResult> DoSearch(SearchQuery q)
         {
 
             var r = new List<SearchProviderResult>();
-
-            var exactMatch = searchString.StartsWith("=>");
-
-
-            if (exactMatch)
-                searchString = searchString.Remove(0, 2);
-
-
-
-            if (searchString.Length < 2)
-                return null;
-
+            var query = q.QueryString;
 
 
             string direction = "en-ru";
 
-            if (Regex.IsMatch(searchString, @"\p{IsCyrillic}"))
+            if (Regex.IsMatch(query, @"\p{IsCyrillic}"))
             {
                 direction = "ru-en";
             }
 
-
-            if (exactMatch)
+            if (q.ExactMatch)
             {
-                r.Add(new SearchProviderResult(this) { DisplayName = TranslateText(searchString, direction), Description = searchString, Priority = SearchProviderResult.PriorityExactMatch });
+                r.Add(new SearchProviderResult(this) { DisplayName = TranslateText(query, direction), Description = query, Priority = SearchProviderResult.PriorityExactMatch });
             }
             else
             {
-                r.Add(new SearchProviderLazyResult(this, searchString, (x => TranslateText(searchString, direction)), SearchProviderResult.PriorityUltraLow));
+                r.Add(new SearchProviderLazyResult(this, query, (x => TranslateText(query, direction)), SearchProviderResult.PriorityLow));
             }
 
             return r;

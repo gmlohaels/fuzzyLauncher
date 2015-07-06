@@ -16,21 +16,21 @@ namespace LoreSoftMathProvider
     public class LoreSoftMathProvider : SearchProvider
     {
         readonly string[] arr = new[] { "+", "-", "*", "/" };
-        protected override List<SearchProviderResult> DoSearch(string searchString)
+        protected override List<SearchProviderResult> DoSearch(SearchQuery query)
         {
 
             int priority = SearchProviderResult.PriorityUltraLow;
             var eval = new MathEvaluator();
 
-         
 
-            if (arr.Any(searchString.Contains))
+
+            if (arr.Any(query.RawQueryString.Contains))
             {
                 priority = SearchProviderResult.PriorityHigh;
             }
 
 
-            double result = eval.Evaluate(searchString);
+            double result = eval.Evaluate(query.RawQueryString);
             return ConstructSingleResult(result.ToString(CultureInfo.InvariantCulture), result.ToString(CultureInfo.InvariantCulture), priority);
 
 

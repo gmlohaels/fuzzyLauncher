@@ -145,11 +145,11 @@ namespace LuceneExec
 
 
 
-        protected override List<SearchProviderResult> DoSearch(string searchString)
+        protected override List<SearchProviderResult> DoSearch(SearchQuery searchQuery)
         {
 
 
-            string text = QueryParser.Escape(searchString);
+            string text = QueryParser.Escape(searchQuery.RawQueryString);
 
             var query = new QueryParser(Version.LUCENE_30, "displayName description customQuickName groupName", analyzer).Parse(
                     string.Format("displayName:{0}* or description:{0}* or displayName:{0}~ or customQuickName:{0}* or customQuickName:{0}~  or groupName:{0}* or groupName:{0} or path:{0}~ ", text));

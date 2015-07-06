@@ -49,29 +49,30 @@ namespace GoogleTranslate
 
 
 
-        protected override List<SearchProviderResult> DoSearch(string searchString)
+        protected override List<SearchProviderResult> DoSearch(SearchQuery s)
         {
-
+            var query = s.RawQueryString;
             var r = new List<SearchProviderResult>();
 
-            var exactMatch = searchString.StartsWith("=>");
+
+            var exactMatch = query.StartsWith("=>");
 
 
             if (exactMatch)
-                searchString = searchString.Remove(0, 2);
+                query = query.Remove(0, 2);
 
 
 
-            if (searchString.Length < 2)
+            if (query.Length < 2)
                 return null;
 
             if (exactMatch)
             {
-                r.Add(new SearchProviderResult(this) { DisplayName = searchString, Description = TranslateText(searchString, "r"), Priority = SearchProviderResult.PriorityExactMatch });
+                r.Add(new SearchProviderResult(this) { DisplayName = query, Description = TranslateText(query, "r"), Priority = SearchProviderResult.PriorityExactMatch });
             }
             else
             {
-                r.Add(new SearchProviderLazyResult(this, searchString, (x => TranslateText(searchString, "")), SearchProviderResult.PriorityUltraLow));
+                r.Add(new SearchProviderLazyResult(this, query, (x => TranslateText(query, "")), SearchProviderResult.PriorityUltraLow));
             }
 
             return r;

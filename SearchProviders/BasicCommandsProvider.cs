@@ -44,21 +44,21 @@ namespace fuzzyLauncher.SearchProviders
 
         }
 
-        protected override List<SearchProviderResult> DoSearch(string searchString)
+        protected override List<SearchProviderResult> DoSearch(SearchQuery q)
         {
-            searchString = searchString.ToLower();
+            var query = q.QueryString.ToLower();
 
             var list = new List<SearchProviderResult>(0);
 
-            if (searchString.StartsWith("prov") || searchString.StartsWith("rest"))
+            if (query.StartsWith("prov") || query.StartsWith("rest"))
                 list.Add(GenerateResult("Provider Stats", GetProvidersDescription()));
 
 
 
-            if (searchString.StartsWith("rel") || searchString.StartsWith("rest"))
+            if (query.StartsWith("rel") || query.StartsWith("rest"))
                 list.Add(GenerateResult(reloadXlaunch));
 
-            if (searchString.StartsWith("ex") || searchString.StartsWith("qu"))
+            if (query.StartsWith("ex") || query.StartsWith("qu"))
             {
                 var searchProviderResult = GenerateResult("exit").SetEnterKeyAction((a) =>
                 {

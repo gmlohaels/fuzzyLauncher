@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using fuzzyLauncher.Utilitary;
 using fuzzyLauncher.Windows;
-using Shared.Base;
-using Shared.Helpers;
 
 namespace fuzzyLauncher
 {
@@ -96,12 +92,12 @@ namespace fuzzyLauncher
 
         private void CenterWindowOnScreen()
         {
-            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
-            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
-            double windowWidth = this.Width;
-            double windowHeight = this.Height;
-            this.Left = (screenWidth / 2) - (windowWidth / 2);
-            this.Top = (screenHeight / 2) - (windowHeight / 2);
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
+            double windowWidth = Width;
+            double windowHeight = Height;
+            Left = (screenWidth / 2) - (windowWidth / 2);
+            Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
 
@@ -144,7 +140,9 @@ namespace fuzzyLauncher
 
         private void ResultList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("DBLCLICK");
+            //Browser.Document.
+            //Browser.ScriptErrorsSuppressed = true;
+            Browser.NavigateToString(File.ReadAllText("z:\\1.htm"));
         }
 
 

@@ -25,7 +25,7 @@ namespace fuzzyLauncher.Behaviors
         public static void SetHtml(WebBrowser d, string value)
         {
 
-          
+
 
             d.SetValue(HtmlProperty, value);
         }
@@ -37,7 +37,7 @@ namespace fuzzyLauncher.Behaviors
             {
                 var value = e.NewValue as string ?? "&nbsp;";
                 //<meta  /> 
-                value = "<meta charset=\"utf-8\" http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" /> " + value;
+                value = "<meta charset=\"utf-8\" http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" /> " + value + "\r\n\r\n<script>window.onerror = function (msg, url, line) { return true; }; void (0);</script>";
                 webBrowser.NavigateToString(value);
             }
         }

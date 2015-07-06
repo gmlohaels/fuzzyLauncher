@@ -27,7 +27,7 @@ namespace Dummy
 
         }
 
-        protected override List<SearchProviderResult> DoSearch(string searchString)
+        protected override List<SearchProviderResult> DoSearch(SearchQuery query)
         {
 
             Thread.Sleep(1000);

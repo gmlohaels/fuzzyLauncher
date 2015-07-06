@@ -1,0 +1,47 @@
+﻿<html>
+<head>
+    <title>On Map</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        
+
+        document.onreadystatechange = function () {
+            if (document.readyState === 'complete') {
+              
+
+        ymaps.ready(function() {
+                var myMap = new ymaps.Map('map', {
+                    center: [55.751574, 37.573856],
+                    zoom: 9
+                }, {
+                    searchControlProvider: 'yandex#search'
+                });
+
+
+                var result = ymaps.geoQuery(ymaps.geocode('{{queryString}}')).applyBoundsToMap(myMap, { checkZoomRange: true });
+            // Откластеризуем полученные объекты и добавим кластеризатор на карту.
+            // Обратите внимание, что кластеризатор будет создан сразу, а объекты добавлены в него
+            // только после того, как будет получен ответ от сервера.
+                myMap.geoObjects.add(result.clusterize());}
+        );
+       
+            }
+        }
+
+    </script>
+    <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>
+
