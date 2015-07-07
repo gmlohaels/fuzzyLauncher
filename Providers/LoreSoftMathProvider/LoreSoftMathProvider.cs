@@ -4,11 +4,13 @@ using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Shared;
+
 using System.ComponentModel.Composition;
 using System.Globalization;
 using LoreSoft.MathExpressions;
+using Shared;
 using Shared.Base;
+
 
 namespace LoreSoftMathProvider
 {

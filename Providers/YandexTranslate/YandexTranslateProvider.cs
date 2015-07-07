@@ -17,7 +17,7 @@ namespace YandexTranslate
     [Export(typeof(SearchProvider))]
     class YandexTranslateProvider : SearchProvider
     {
-
+        private static string apiKey = "trnsl.1.1.20150624T044522Z.904fd838812ba867.80102829f6e81c4e6644da5342680bc8dbeff88f";
         public YandexTranslateProvider()
         {
             ImageWrapper.SetIcon(Resource.y2);
@@ -28,7 +28,7 @@ namespace YandexTranslate
         public static string TranslateText(string input, string direction)
         {
             string strUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?";
-            strUrl += "key=trnsl.1.1.20150624T044522Z.904fd838812ba867.80102829f6e81c4e6644da5342680bc8dbeff88f";
+            strUrl += "key=" + apiKey;
             strUrl += "&lang=" + direction;
             strUrl += "&text=" + input;
             WebClient wc = new WebClient { Encoding = Encoding.UTF8 };

@@ -4,14 +4,15 @@ using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Shared;
-using Shared.Base;
+
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using GoogleTranslate.Properties;
+using Shared;
+using Shared.Base;
 
 namespace GoogleTranslate
 {

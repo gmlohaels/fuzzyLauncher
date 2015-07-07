@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fuzzyLauncher", "fuzzyLaunc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{1AED52C5-C0A4-485B-A943-CA58035EF137}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared.csproj", "{1B56D841-762A-4373-A9E9-FFDF3B10E47E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dummy", "Providers\Dummy\Dummy.csproj", "{240507EB-5B10-445B-A04D-4A79C4CB7E37}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuceneExec", "Providers\LuceneExec\LuceneExec.csproj", "{AED87E37-BFF7-4B3A-AB77-63B981AC2A2C}"
@@ -28,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexTranslate", "Providers\YandexTranslate\YandexTranslate.csproj", "{E5B656AA-418D-47C6-B23A-6842A370289E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexMaps", "Providers\YandexMaps\YandexMaps.csproj", "{6E5E5038-68BE-4DE5-96D0-B8507639EDDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{1B56D841-762A-4373-A9E9-FFDF3B10E47E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,16 +51,6 @@ Global
 		{1FDF81A0-DAC2-4A18-9458-1281A9E3863A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1FDF81A0-DAC2-4A18-9458-1281A9E3863A}.Release|x64.ActiveCfg = Release|x64
 		{1FDF81A0-DAC2-4A18-9458-1281A9E3863A}.Release|x64.Build.0 = Release|x64
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|x64.ActiveCfg = Release|Any CPU
 		{240507EB-5B10-445B-A04D-4A79C4CB7E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{240507EB-5B10-445B-A04D-4A79C4CB7E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{240507EB-5B10-445B-A04D-4A79C4CB7E37}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -121,6 +111,16 @@ Global
 		{6E5E5038-68BE-4DE5-96D0-B8507639EDDC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6E5E5038-68BE-4DE5-96D0-B8507639EDDC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6E5E5038-68BE-4DE5-96D0-B8507639EDDC}.Release|x64.ActiveCfg = Release|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1B56D841-762A-4373-A9E9-FFDF3B10E47E}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

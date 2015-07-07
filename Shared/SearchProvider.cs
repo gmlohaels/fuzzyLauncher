@@ -11,7 +11,7 @@ namespace Shared
 {
     public abstract class SearchProvider
     {
-
+        //
         public WpfImageWrapper ImageWrapper = new WpfImageWrapper();
 
 

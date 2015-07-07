@@ -173,12 +173,6 @@
     <Resource Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{1b56d841-762a-4373-a9e9-ffdf3b10e47e}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Application.bmp" />
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +186,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="launcher.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Shared\Shared.csproj">
+      <Project>{1B56D841-762A-4373-A9E9-FFDF3B10E47E}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
