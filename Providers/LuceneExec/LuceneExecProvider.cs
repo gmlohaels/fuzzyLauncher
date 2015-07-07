@@ -57,30 +57,35 @@ namespace LuceneExec
 
           //  foreach (var file in fileList)
               {
-
-                  var info = new DirectoryInfo(file).Parent;
-                  var dirName = info;
-                  var group = "";
-
-                  if (info.Parent != null) group = info.Parent.Name.ToLower();
-                  //TODO: log errors
-                  var fileName = Path.GetFileName(file).ToLower();
-
-                  if (!fileName.StartsWith("unins"))
+                  try
                   {
-                      var q = new AppQuickId()
+                      var info = new DirectoryInfo(file).Parent;
+                      var dirName = info;
+                      var group = "";
+
+                      if (info.Parent != null) group = info.Parent.Name.ToLower();
+                      //TODO: log errors
+                      var fileName = Path.GetFileName(file).ToLower();
+
+                      if (!fileName.StartsWith("unins"))
                       {
-                          GroupName = group,
-                          CustomQuickName = file.ToLower(),
-                          Description = dirName.ToString().ToLower(),
-                          DisplayName = fileName,
-                          Path = file.ToLower(),
-                      };
+                          var q = new AppQuickId()
+                                      {
+                                          GroupName = group,
+                                          CustomQuickName = file.ToLower(),
+                                          Description = dirName.ToString().ToLower(),
+                                          DisplayName = fileName,
+                                          Path = file.ToLower(),
+                                      };
 
-                      iconCache.TryAdd(q.Path, IconHelper.ExtractAssociatedBitmap(file));
-                      l.Add(q);
+                          iconCache.TryAdd(q.Path, IconHelper.ExtractAssociatedBitmap(file));
+                          l.Add(q);
+                      }
                   }
-
+                  catch (Exception e)
+                  {
+                      
+                  }
 
               }
             );
@@ -97,7 +102,7 @@ namespace LuceneExec
 
 
 
-            LuceneRamInit(LoadQuickAppList("d:\\ProgramFiles\\", "*.exe"));
+            LuceneRamInit(LoadQuickAppList("c:\\Program Files (x86)\\", "*.exe"));
         }
 
         private void LuceneRamInit(IEnumerable<AppQuickId> quickAppList)
