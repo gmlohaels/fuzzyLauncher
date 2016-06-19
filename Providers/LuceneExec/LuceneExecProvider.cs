@@ -48,14 +48,13 @@ namespace LuceneExec
 
             var l = new ConcurrentBag<AppQuickId>();
 
-            var fileList = System.IO.Directory.EnumerateFiles(path, mask, SearchOption.AllDirectories);
+            var fileList = System.IO.Directory.EnumerateFiles(path, mask, SearchOption.AllDirectories).IgnoreExceptions();
+
+            
 
             Parallel.ForEach(
                 fileList,
               file =>
-
-
-          //  foreach (var file in fileList)
               {
                   try
                   {
@@ -98,11 +97,10 @@ namespace LuceneExec
 
         protected override void Initialize()
         {
+            var quickAppList = LoadQuickAppList("c:\\Program Files (x86)\\", "*.exe");
+            quickAppList.AddRange(LoadQuickAppList("c:\\Program Files\\", "*.exe"));
 
-
-
-
-            LuceneRamInit(LoadQuickAppList("c:\\Program Files (x86)\\", "*.exe"));
+            LuceneRamInit(quickAppList);
         }
 
         private void LuceneRamInit(IEnumerable<AppQuickId> quickAppList)
