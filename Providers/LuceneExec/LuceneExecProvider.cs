@@ -48,45 +48,48 @@ namespace LuceneExec
 
             var l = new ConcurrentBag<AppQuickId>();
 
-            var fileList = System.IO.Directory.EnumerateFiles(path, mask, SearchOption.AllDirectories).IgnoreExceptions();
-
-            
+            var fileList = System.IO.Directory.EnumerateFiles(path, mask, SearchOption.AllDirectories);
 
             Parallel.ForEach(
                 fileList,
-              file =>
-              {
+              file => {
+
                   try
                   {
-                      var info = new DirectoryInfo(file).Parent;
-                      var dirName = info;
-                      var group = "";
-
-                      if (info.Parent != null) group = info.Parent.Name.ToLower();
-                      //TODO: log errors
-                      var fileName = Path.GetFileName(file).ToLower();
-
-                      if (!fileName.StartsWith("unins"))
+                      //  foreach (var file in fileList)
                       {
-                          var q = new AppQuickId()
-                                      {
-                                          GroupName = group,
-                                          CustomQuickName = file.ToLower(),
-                                          Description = dirName.ToString().ToLower(),
-                                          DisplayName = fileName,
-                                          Path = file.ToLower(),
-                                      };
 
-                          iconCache.TryAdd(q.Path, IconHelper.ExtractAssociatedBitmap(file));
-                          l.Add(q);
+                          var info = new DirectoryInfo(file).Parent;
+                          var dirName = info;
+                          var group = "";
+
+                          if (info.Parent != null) group = info.Parent.Name.ToLower();
+                          //TODO: log errors
+                          var fileName = Path.GetFileName(file).ToLower();
+
+                          if (!fileName.StartsWith("unins"))
+                          {
+                              var q = new AppQuickId()
+                              {
+                                  GroupName = group,
+                                  CustomQuickName = file.ToLower(),
+                                  Description = dirName.ToString().ToLower(),
+                                  DisplayName = fileName,
+                                  Path = file.ToLower(),
+                              };
+
+                              iconCache.TryAdd(q.Path, IconHelper.ExtractAssociatedBitmap(file));
+                              l.Add(q);
+                          }
+
+
                       }
                   }
-                  catch (Exception e)
+                  catch 
                   {
-                      
-                  }
 
-              }
+                  }
+                }
             );
 
 
@@ -97,10 +100,7 @@ namespace LuceneExec
 
         protected override void Initialize()
         {
-            var quickAppList = LoadQuickAppList("c:\\Program Files (x86)\\", "*.exe");
-            quickAppList.AddRange(LoadQuickAppList("c:\\Program Files\\", "*.exe"));
-
-            LuceneRamInit(quickAppList);
+            LuceneRamInit(LoadQuickAppList("C:\\Program Files (x86)", "*.exe"));
         }
 
         private void LuceneRamInit(IEnumerable<AppQuickId> quickAppList)

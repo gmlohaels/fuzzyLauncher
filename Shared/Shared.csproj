@@ -46,7 +46,6 @@
     <Compile Include="Base\SearchProviderResult.cs" />
     <Compile Include="Helpers\CyrillicHelper.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
-    <Compile Include="Helpers\LinqHelper.cs" />
     <Compile Include="SearchProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchRequest.cs" />

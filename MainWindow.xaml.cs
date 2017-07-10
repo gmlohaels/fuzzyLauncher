@@ -142,7 +142,7 @@ namespace fuzzyLauncher
         {
             //Browser.Document.
             //Browser.ScriptErrorsSuppressed = true;
-            Browser.NavigateToString(File.ReadAllText("z:\\1.htm"));
+            Browser.NavigateToString(File.ReadAllText("d:\\1.htm"));
         }
 
 
